@@ -486,6 +486,85 @@ class WorkData
 
 
 
+//5) ************* INIT **************
+//  function Init() 
+// {
+//     // let bool = false;
+// }
+// Init.prototype.getParameter = function() 
+// {
+//     const defaultCityName = document.querySelector('#city').value; 
+//     localStorage.setItem("bool", `false`); 
+//     // let bool = new Boolean( localStorage.getItem("bool") );
+//     // alert( bool instanceof Boolean);
+//     bool = false;
+//     counter = 1;
+
+//     // if ( localStorage.getItem("bool") === 'false' ) 
+//     if (bool == false || localStorage.getItem("bool") === 'false')
+//     { 
+//         // alert("la valeur de 'bool' est  ---> " + this.bool)
+//         fetch( "http://api.openweathermap.org/data/2.5/weather?q=" + defaultCityName + "&units=metric&lang=de&appid="+ new Provider('c9842f587841ab3d8440bdae432a3299').apiKey
+//         ).then ( (res) => {
+//             if ( res.ok ) { //request success
+//                 localStorage.setItem("defaultCityName", defaultCityName); 
+//                 document.querySelector('#home').setAttribute('class','home-transition'); 
+//                 this.getNextPage();  
+//             }
+//             else {
+//                 document.querySelector('.requied').style.display = 'block';
+//                 window.setTimeout( function() {
+//                     document.querySelector('.requied').style.display = 'none';
+//                 },
+//                 5000);
+//             } 
+            
+//             bool = true;
+//             localStorage.setItem( "bool", `${bool}` ); 
+//         }, 
+//         (reason) => {
+//             window.alert('Check your Internet quality');
+//             console.error(reason);
+//         }).catch((reason)=> console.error(reason));
+
+        
+//     } else{
+//         this.getNextPage();
+//     }
+
+    // if ( localStorage.getItem("bool") == 'true' )
+    // if (bool == true) {
+    //     document.querySelector('#home').style.display = 'none';    
+    //     document.querySelector('#main-bloc').style.display = 'block';
+    //     document.querySelector('.bloc-prevision').style.display = 'flex';
+    //     document.querySelector('.container').style.display = 'block'; 
+
+    //     // localStorage.setItem( "bool", 'false' ); 
+    //     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
+    //     this.getNextPage();  
+    // } 
+// }
+// Init.prototype.getNextPage = function() 
+// { 
+//     new Provider( 'c9842f587841ab3d8440bdae432a3299' ).fetchWeatherByCityName( localStorage.getItem("defaultCityName") ); 
+//     document.querySelector('#cityName').innerText = localStorage.getItem('defaultCityName'); 
+//     this.closeHomePage();
+// } 
+// Init.prototype.closeHomePage = function() {
+    
+//     document.querySelector('#home').style.display = 'none';    
+//     document.querySelector('#main-bloc').style.display = 'block';
+//     document.querySelector('.bloc-prevision').style.display = 'flex';
+//     document.querySelector('.container').style.display = 'block'; 
+
+//     // localStorage.setItem( "bool", 'false' ); 
+//     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
+//     // this.getNextPage();  
+// }
+
+
+
+
 
 
 
