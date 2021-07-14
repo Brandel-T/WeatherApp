@@ -293,6 +293,61 @@ Reorganizer.prototype.displayDaysInorder = function()
 }
 
 
+Reorganizer.prototype.changeHour = function( days_ordered ) 
+{ 
+    setInterval( 
+        function () { 
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+            const d = new Date();
+            // let sec = d.getSeconds();
+            let min = d.getMinutes();
+            let h = d.getHours();
+    
+            // if ( d.getSeconds() < 10 ) sec = `0${d.getSeconds()}`; 
+            if ( d.getMinutes() < 10 ) min = `0${d.getMinutes()}`;
+            if ( d.getHours() < 10 ) h = `0${d.getHours()}`;
+            document.querySelector('p.hour').innerHTML = days_ordered[days_ordered.length-1] + ", "+ d.getDate() + " " + months[d.getMonth()]+ " " + d.getFullYear()+ `, <strong> ${h}:${min} </strong>` ;
+        },
+        1000
+    );
+}
+const days = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+const reorganizeDays = new Reorganizer( days, months );
+let daysInOrder = reorganizeDays.displayDaysInorder();  // default daysInOrder
+reorganizeDays.changeHour( daysInOrder );
+
+
+
+
+
+
+//2) ********  MENU_BAR_INTERACTIONS  *********
+function MenuBarInteractions( openMenuBtn, closeMenuBtn ) 
+{
+    this.openMenuBtn = openMenuBtn;
+    this.closeMenuBtn = closeMenuBtn;
+}
+
+MenuBarInteractions.prototype.openMenu = function openMenu() {  
+    this.openMenuBtn.addEventListener('click', () => {
+        document.querySelector('.menu').style.width = '350px'; 
+        document.body.style.transition = '.3s ease-in-out'; 
+        document.querySelector('.menu-header').style.display = 'block'; 
+        document.querySelector('#standort-verwalten').style.display = 'block';
+    });
+}
+MenuBarInteractions.prototype.closeMenu = function closeMenu() {
+    this.closeMenuBtn.addEventListener('click', () => {
+        document.querySelector('.menu').style.width = '0px'; 
+        document.body.style.transition = '.3s ease-in-out';  
+        document.querySelector('.menu-header').style.display = 'none';
+        document.querySelector('#standort-verwalten').style.display = 'none';
+    });
+}
+const menuInteraction = new MenuBarInteractions( document.querySelector('.menu-icon'), document.querySelector('.toclose-icon') );
+menuInteraction.openMenu();
+menuInteraction.closeMenu();
 
 
 
