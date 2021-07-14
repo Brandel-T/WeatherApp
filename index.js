@@ -563,6 +563,118 @@ class WorkData
 // }
 
 
+// if ( localStorage.getItem("bool") == 'true' ) {
+//     document.querySelector('#home').style.display = 'none';    
+//     document.querySelector('#main-bloc').style.display = 'block';
+//     document.querySelector('.bloc-prevision').style.display = 'flex';
+//     document.querySelector('.container').style.display = 'block'; 
+
+//     // localStorage.setItem( "bool", 'false' ); 
+//     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
+//     new Init().getNextPage();  
+// } 
+// else{
+//     window.localStorage.setAttribute('bool', 'false');
+// }
+
+
+
+
+
+
+//6) *************  USER  **************
+  
+
+class User 
+{
+    constructor() {
+        this.hasNewCityName = false; //the town name is not given
+    }
+
+    openInputField() { 
+        // if ( this.hasNewCityName == false ) {
+        //     document.querySelector('#menu-getinput').style.display = 'flex';
+        //     // this.hasNewCityName = true;
+        // } 
+        // else  {
+        //     document.querySelector('#menu-getinput').style.display = 'none';
+        //     // this.hasNewCityName = false;
+        // }  
+        // if (hasNewCityName) {}
+        standort_verwalten.addEventListener('click', function() { 
+            document.querySelector('#menu-getinput').style.display = 'flex';     
+            document.querySelector('#input-storage').focus();
+        });
+
+        submit.addEventListener('click', this.setDefaultTown);
+
+        //actions on inner elements of menu 
+        document.querySelector('.standort').addEventListener(
+            'click',
+            function() {
+                const city = document.querySelector('.standort span').textContent ;
+                new Provider('c9842f587841ab3d8440bdae432a3299').fetchWeatherByCityName(city);
+            }
+        ); 
+    }
+
+    setDefaultTown( newCityName ) {
+        
+        newCityName = document.querySelector('#input-storage').value;
+        if ( newCityName == '') {
+            document.querySelector('#menu-getinput').style.borderBottom = '2px solid red';
+            this.hasNewCityName = true;
+        } 
+        else {
+            new Init().getParameter();
+            window.localStorage.setItem('defaultCityName', newCityName);
+
+            document.querySelector('#menu-getinput').style.borderBottom = 'none';
+            document.querySelector('.standort span').textContent = newCityName;
+            document.querySelector('#input-storage').style.display = 'none';
+            document.querySelector('#btn-storage').style.display = 'none'; 
+            this.hasNewCityName = false;
+        }
+    }
+
+    getWeather() {
+        document.querySelector('.search-icon').addEventListener('click', (e) => { 
+            if ( e.key == "Enter" ) { 
+                if (document.querySelector('.search').value == '') {
+                    alert("enter a city name");     
+                }
+                new WorkData().search();  
+            }
+            else if ( e.type == 'click' ) {
+                if (document.querySelector('.search').value == '') {
+                    alert("enter a city name");     
+                }
+    
+                new WorkData().search(); 
+            }
+        });    
+    }
+}
+
+const user = new User(); 
+user.openInputField();
+user.getWeather();
+
+
+
+// standort_verwalten.addEventListener('click', user.openInputField); //standort_verwalten == setting (dans appStorage.js)
+// submit.addEventListener('click', user.setDefaultTown);
+
+// function errorTrigger(element) 
+// {
+//     element.style.border = '2px solid red';
+//     element.style.boxShadow = '0px 0px 8px red';
+//     window.setTimeout(function () {
+//         element.style.border = '0px';
+//         element.style.boxShadow = 'none';
+//     }, 3000);
+// }
+
 
 
 
