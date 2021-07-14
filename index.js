@@ -349,6 +349,139 @@ const menuInteraction = new MenuBarInteractions( document.querySelector('.menu-i
 menuInteraction.openMenu();
 menuInteraction.closeMenu();
 
+//4) *****  WORKDATA  ******
+class WorkData 
+{
+    constructor( data ) {
+        this.data = data; 
+    }
+
+    displayCurrentWeather( data ) 
+    {
+        const { name } = data;  
+        const { icon, description } = data.weather[0];
+        const { temp, humidity } = data.main;
+        const { speed } = data.wind;
+        console.log(data, name, icon, description, temp, humidity, speed );
+        document.querySelector('.city').innerHTML = 
+            `<i style="padding-right: 1rem; font-size: 0.6em" class="fas fa-map-marker-alt"></i>  ${name}`;
+        document.querySelector('.icon').src = "https://openweathermap.org/img/wn/"+ icon +"@2x.png";
+        document.querySelector('#menu-weather-logo').src = "https://openweathermap.org/img/wn/"+ icon +".png";  
+        document.querySelector('.temp').innerText = Math.ceil(temp) + "°C";
+        document.querySelector('#menu-weather-logo-temp').innerText = Math.ceil(temp) + "°C";
+        document.querySelector('.description').innerText = description;
+        document.querySelector('.humidity').innerHTML = `<i style="color:#0a94ca ; font-weight: 500;" class="fas fa-dewpoint"></i> ${humidity} %`;
+        document.querySelector('.wind').innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${speed} Km/h`;
+    
+        document.querySelector('.weather').classList.remove('loading');  
+
+        switch ( icon ) 
+        {
+            case "01n" :
+            case "02n" :    
+                document.body.style.backgroundImage =  "url('./weather_images/nigth.jpg')";
+                break;
+            case "01d" :  
+                document.body.style.backgroundImage =  "url('./weather_images/clear_sky.jpg')";
+                break;
+            case "02d" :  
+            case "02n" :
+                document.body.style.backgroundImage =  "url('./weather_images/few_clouds.jpg')";
+                break;
+            case "50d" :
+            case "50n" :  
+                document.body.style.backgroundImage =  "url('./weather_images/mist.jpg')" ;
+                document.body.style.transition = "1s ease-in";
+                break;
+            case "09d" :  
+            case "09n" :  
+            case "10n" :  
+            case "10d" :  
+                document.body.style.backgroundImage =  "url('./weather_images/raining.jpg')";
+                break;
+            case "03d" :
+            case "03n" :    
+                document.body.style.backgroundImage =  "url('./weather_images/scattered_clouds.jpg')";
+                break;
+            case "13n" : 
+            case "13d" :    
+                document.body.style.backgroundImage =  "url('./weather_images/snow.jpg')" ;
+                break;
+            case "11d" :
+            case "11n" :    
+                document.body.style.backgroundImage =  "url('./weather_images/storm.jpg')" ;
+                break;
+            case "04n" :
+            case "04d" :
+                document.body.style.backgroundImage =  "url('./weather_images/broken_clouds.jpg')" ;
+                break;
+        }
+    }
+
+    displayHourlyForecast( data ) 
+    {
+        let d = new Date();
+        let hour = d.getHours(); 
+
+        let hourly_forecast = document.querySelectorAll('.hourly-forecast');
+        let hourly = document.querySelectorAll('.hourly');
+        let icon_hour = document.querySelectorAll('.icon-hour');
+        let temp_hour = document.querySelectorAll('.temp-hour');  
+        let humidity_hour = document.querySelectorAll('.humidity-hour');
+
+        //every 1 hour
+        for (let i=0 ; i < hourly_forecast.length; i++) 
+        {
+            //hour
+            if (hour < 10) {
+                hourly[i].innerText = `0${hour}:00`;
+            } else if ( hour >= 24) {
+                hour = hour -24;
+                if (hour < 10) 
+                    hourly[i].innerText = `0${hour}:00`;
+                else
+                    hourly[i].innerText = `${hour}:00`;
+            } else {
+                hourly[i].innerText = `${hour}:00`;
+            }
+            hour = hour + 1; //next hour
+
+            //hourly weather condition icons 
+            icon_hour[i].src ="http://openweathermap.org/img/wn/"+ data.hourly[i].weather[0].icon+ ".png" ;
+            
+            //temperature 
+            temp_hour[i].innerText = Math.trunc(data.hourly[i].temp) + " °c";
+
+            //humidity
+            humidity_hour[i].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${data.hourly[i].humidity} %`; 
+        }
+    }
+
+    displayDailyForecast( data )
+    {
+        let j = 0; 
+        for (let i=1; i<=7 ; i++ ) 
+        {
+            const { min, max } = data.daily[i].temp //les temperatures min et max
+            const { icon } = data.daily[i].weather[0];
+            const { humidity, wind_speed} = data.daily[i];
+            console.log("daily forecast   ", min, max, icon,humidity, wind_speed);
+
+            document.querySelectorAll('.temp-min-max')[j].innerText = Math.ceil(min) +"°/" + Math.ceil(max) + "°C";
+            document.querySelectorAll('.icon-prevision')[j].src = "http://openweathermap.org/img/wn/"+ icon+ ".png";
+            document.querySelectorAll('.humidity')[j].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${humidity} %`;
+            document.querySelectorAll('.wind-speed')[j].innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${wind_speed} Km/h`;
+            console.log("j  ", j)
+            j++; 
+        }
+    }
+
+    search () {
+        new Provider('c9842f587841ab3d8440bdae432a3299').fetchWeatherByCityName( document.querySelector('.search').value ) //pour recupérer le nom de la ville
+        document.querySelector('.search').blur();
+    } 
+}
+
 
 
 
