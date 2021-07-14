@@ -2,17 +2,14 @@
 *{
     box-sizing: border-box;
 } 
-.bloc-prevision {
-    /* height: 100vh; */
+.bloc-prevision { 
     
     display: none;
 
     height: 100%;
-    width: 100%;
-    /* font-family:Helvetica; */
+    width: 100%; 
     font-size: .8em;
-
-    /* display: flex; */
+ 
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -24,8 +21,7 @@
     width: 100%;
     border-radius: 2em;
     border:none; 
-    background-color: #000000a1;
-    /* font-size: 1.5rem; */
+    background-color: #000000a1; 
     margin-top: 2.2% ;
     display: grid;
     grid-template-columns: 30% 30% 30%;
@@ -60,14 +56,12 @@
     color: #ffffff41;
 }
 .temp-min-max { 
-    color: rgba(255, 255, 255, 0.424);
-    /* font-family:monospace; */
+    color: rgba(255, 255, 255, 0.424); 
     font-size: 1em;
 }
 .icon-prevision {
     border-radius: 50%; 
-    background-color: #97929257;
-    /* background-color: #6e686857; */
+    background-color: #97929257; 
 }
 .day {
     color: rgb(255, 255, 255);
