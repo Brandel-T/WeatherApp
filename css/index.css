@@ -1,0 +1,328 @@
+
+body {
+    /* background-image: url('https://source.unsplash.com/1600x900/?Bingen am rhein'); */
+    /* background-image: url( 'weather_images/nigth.jpg' ) ; */
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: cover; 
+    background-position: center;  
+    height: 100%; 
+    /* font-family: Arial, Helvetica, sans-serif;  */
+}
+/* 
+#loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+
+    transition: s ease-in;
+}
+#loading_img {
+    font-size: 1rem;
+} */
+ 
+
+#main-bloc {  
+ 
+    display: block;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start; */
+
+    height: auto;
+    width: 100%;
+    margin: 1% 0% ;
+    transition: .5s ease-in-out;
+
+} 
+#home {  
+    
+    background : linear-gradient(50deg, #1e3eccf8, black);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* font-family:  Helvetica, sans-serif; */
+}
+.home-trnasition {
+    transition: 2s ease-in-out;
+    transform: translateX(-100%);
+    /* width: 0; */
+}
+
+.home-ctn { 
+    height: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+} 
+#home-titel {
+    color: #4aa0e6;
+    font-size: 2em;
+}
+
+/* @keyframes fade {
+    from { background-color: greenyellow;}
+    to { background-color: #1b73e6;}
+}
+/** transition juste avant l'ouverture de l'application */
+.logo-img-oncharge {
+    transition: .1s ease-in-out;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    background-color: fade 1s infinite;
+} 
+
+#home-label {
+    font: .5rem;
+    margin-top: .7em;
+    border-radius: 7px ;
+    border: 1px solid #4aa0e6 ;
+    color: #ffffffbf;
+    padding: 1em;
+    text-align: center;
+}
+#city {
+    height: 2em;
+    font-size: 25px;
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 5px solid white;
+    background-color:  transparent;
+    color: white;
+    margin-top: 1em;
+}
+#city:focus { 
+    border-bottom: 5px solid #4aa0e6;
+    transition: .5s ease-in-out;
+}
+.requied {
+    display: none;
+    font-size: .7em;
+    height: 20px;
+    width: 100%;
+    background-color: #fa3928;
+    color: whitesmoke;
+    border-radius: 7px ;
+    text-align: center;
+}
+#home-btn {
+    font-size: 1.2rem;
+    margin-top: 1em;
+    padding: .3em 1em;
+    border-radius: 6px; 
+    box-shadow: 3px 6px 15px 0px black;
+}
+#home-btn:hover{
+    background-color: #021bffa6;
+    color: white;
+}
+
+.scroll-top-bar { 
+    background-color: #333;
+    position: fixed;
+    top: -50px;
+    width: 100%;
+    display: block;
+    transition: top 1s; 
+}
+
+.container { 
+
+    display: none;
+    /* display: block; */
+
+    background-color: #000000c5;
+    height: auto;
+    width: 100%; 
+    border-radius: 2.9em;
+    color: white;
+    padding: 5% 0; 
+    transition: 2s ease-in-out;
+}
+
+.top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 4%;
+}
+.menu-icon {
+    width: 10%; 
+}
+
+.search-bar {  
+    height: 20%; 
+    width: 90%; 
+    background-color: rgba(110, 104, 104, 0.342);
+    border-radius: 2rem;
+}
+ 
+input.search {   
+    color: white;
+    font-size: 1.2em;
+    /* font-family:  Verdana, sans-serif;  */
+    padding-left: 22px;
+    width: 80%;  
+    height: 3rem;
+    line-height: 100%;
+    border-radius: 2rem;
+    background-color: rgba(77, 76, 76, 0);
+    border: transparent;
+} 
+.search-icon { 
+    float: right;
+    margin-left: 1%;
+    width: 19%;
+    height: 2.27em; 
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(77, 76, 76, 0);
+    font-size: 1.3em;
+    border: transparent;
+    border-radius: 1.8em;
+}
+button.search-icon:hover { 
+    background-color: rgba(0, 0, 0, 0.774); ;
+}
+
+.weather {
+    margin: 3% 10%;
+    height: 70%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.city {
+    flex: auto;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3em auto .5 auto;
+    /* text-shadow: 7px 7px #00fcfc3d; */
+    /* position: sticky; */
+    top: 0;
+} 
+.hour {
+    text-align: center; 
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    color: #00fcfcbb;
+    font-weight: initial;
+    font-size: 1.1em; 
+}
+#current-details {
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between; 
+} 
+#current-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.icon-hour,
+.icon {
+    background-color: #6e686857;
+    border-radius: 50%;  
+}
+.temp {   
+    font-size: 3.5em;
+    /* font-family: helvetica; */
+}
+.description{ 
+    font-size: 1.2em;
+    padding: .3rem;
+}
+.humidity { 
+    font-size: .9em;
+    padding: .2rem;
+}
+.wind{ 
+    font-size: .9em;
+    padding: .3rem;
+}
+
+.weather.loading {
+    visibility: hidden;
+    height: 30px;
+    position: relative;
+}
+
+.weather.loading::after {
+    visibility: visible;
+    content: 'Loading...';
+    color: white;
+    position: absolute;
+    top: 0; 
+    font-size: 1.3em;
+}
+
+
+
+
+.div {
+    white-space: nowrap;
+    overflow-x: scroll; 
+    width: 100%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.hourly-forecast {
+    padding: 12px;
+    border-radius: 1.5em;
+    border: 1px solid #6e686857;
+    color: white;
+    background-color: #000000a1;
+    margin: 0 2.5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.humidity-hour,
+.temp-hour{
+    font-size: .8em;
+}
+
+.toclose-icon {
+    position: absolute;
+    top: 3em;
+    right: 3em ;
+    width: 0; /**/
+    
+    cursor: pointer;
+}
+
+
+
