@@ -48,15 +48,7 @@
   menu_header.append(getinput); 
   document.querySelector('#menu-getinput').style.display = 'none';
 
-document.body.style.fontFamily = 'tahoma';
-
-// class WeatherApp 
-// {
-//     constructor() {
-
-//     }
-
-// }
+document.body.style.fontFamily = 'tahoma'; 
 
       
 let p = document.createElement('p');
@@ -102,8 +94,7 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
 }
 Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
 
-    let fetchedCurrentData = {};
-            // https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt={time}&appid=${this.apiKey}
+    let fetchedCurrentData = {}; 
     fetch( `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${this.apiKey}`)
     .then(  (response) => {
         if ( response.ok ) {
@@ -117,8 +108,7 @@ Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
             console.error("ERROR by getting weather data using geolocation");
         }
     });
-
-    // console.log("par la geolocalisation          ..............", fetchedCurrentData);
+ 
     return fetchedCurrentData;
 }  
 
@@ -133,49 +123,8 @@ class Init
     }
 
     getParameter()
-    { 
-        // const defaultCityName = window.localStorage.getItem('defaultCityName'); 
-        const defaultCityName = document.querySelector('#city').value;
-        // let bool = new Boolean( localStorage.getItem("bool") );
-        // alert( bool instanceof Boolean);
-        // bool = false;
-        // counter = 1;
-        // if ()
-
-        // // if ( localStorage.getItem("bool") === 'false' ) 
-        // if (this.isInitialize == false || localStorage.getItem("bool") === 'false')
-        // { 
-        //     this.isInitialize = true;
-        //     // alert("la valeur de 'bool' est  ---> " + this.bool)
-        //     fetch( "http://api.openweathermap.org/data/2.5/weather?q=" + defaultCityName + "&units=metric&lang=de&appid="+ new Provider('c9842f587841ab3d8440bdae432a3299').apiKey)
-        //     .then ( (res) => {
-        //         if ( res.ok ) { //request success
-        //             // bool = true;
-        //             localStorage.setItem( "bool", `true` ); 
-        //             localStorage.setItem("defaultCityName", defaultCityName); 
-        //             // document.querySelector('#home').setAttribute('class','home-transition'); 
-        //             this.getNextPage();  
-        //         }
-        //         else {
-        //             document.querySelector('.requied').style.display = 'block';
-        //             window.setTimeout( function() {
-        //                 document.querySelector('.requied').style.display = 'none';
-        //             },
-        //             5000);
-        //         } 
-                
-        //         }, 
-        //         (reason) => {
-        //             window.alert('Check your Internet quality');
-        //             console.error(reason);
-        //     })
-        //     .catch((reason)=> console.error(reason));
-
-        // }
-        // else if ( localStorage.getItem("bool") === 'true' ) {
-        //     this.getNextPage();
-        //     document.querySelector('#home').setAttribute('class','home-transition'); 
-        // }
+    {  
+        const defaultCityName = document.querySelector('#city').value; 
         
         if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
             this.closeHomePage();
@@ -484,104 +433,6 @@ class WorkData
 
 
 
-
-
-//5) ************* INIT **************
-//  function Init() 
-// {
-//     // let bool = false;
-// }
-// Init.prototype.getParameter = function() 
-// {
-//     const defaultCityName = document.querySelector('#city').value; 
-//     localStorage.setItem("bool", `false`); 
-//     // let bool = new Boolean( localStorage.getItem("bool") );
-//     // alert( bool instanceof Boolean);
-//     bool = false;
-//     counter = 1;
-
-//     // if ( localStorage.getItem("bool") === 'false' ) 
-//     if (bool == false || localStorage.getItem("bool") === 'false')
-//     { 
-//         // alert("la valeur de 'bool' est  ---> " + this.bool)
-//         fetch( "http://api.openweathermap.org/data/2.5/weather?q=" + defaultCityName + "&units=metric&lang=de&appid="+ new Provider('c9842f587841ab3d8440bdae432a3299').apiKey
-//         ).then ( (res) => {
-//             if ( res.ok ) { //request success
-//                 localStorage.setItem("defaultCityName", defaultCityName); 
-//                 document.querySelector('#home').setAttribute('class','home-transition'); 
-//                 this.getNextPage();  
-//             }
-//             else {
-//                 document.querySelector('.requied').style.display = 'block';
-//                 window.setTimeout( function() {
-//                     document.querySelector('.requied').style.display = 'none';
-//                 },
-//                 5000);
-//             } 
-            
-//             bool = true;
-//             localStorage.setItem( "bool", `${bool}` ); 
-//         }, 
-//         (reason) => {
-//             window.alert('Check your Internet quality');
-//             console.error(reason);
-//         }).catch((reason)=> console.error(reason));
-
-        
-//     } else{
-//         this.getNextPage();
-//     }
-
-    // if ( localStorage.getItem("bool") == 'true' )
-    // if (bool == true) {
-    //     document.querySelector('#home').style.display = 'none';    
-    //     document.querySelector('#main-bloc').style.display = 'block';
-    //     document.querySelector('.bloc-prevision').style.display = 'flex';
-    //     document.querySelector('.container').style.display = 'block'; 
-
-    //     // localStorage.setItem( "bool", 'false' ); 
-    //     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
-    //     this.getNextPage();  
-    // } 
-// }
-// Init.prototype.getNextPage = function() 
-// { 
-//     new Provider( 'c9842f587841ab3d8440bdae432a3299' ).fetchWeatherByCityName( localStorage.getItem("defaultCityName") ); 
-//     document.querySelector('#cityName').innerText = localStorage.getItem('defaultCityName'); 
-//     this.closeHomePage();
-// } 
-// Init.prototype.closeHomePage = function() {
-    
-//     document.querySelector('#home').style.display = 'none';    
-//     document.querySelector('#main-bloc').style.display = 'block';
-//     document.querySelector('.bloc-prevision').style.display = 'flex';
-//     document.querySelector('.container').style.display = 'block'; 
-
-//     // localStorage.setItem( "bool", 'false' ); 
-//     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
-//     // this.getNextPage();  
-// }
-
-
-// if ( localStorage.getItem("bool") == 'true' ) {
-//     document.querySelector('#home').style.display = 'none';    
-//     document.querySelector('#main-bloc').style.display = 'block';
-//     document.querySelector('.bloc-prevision').style.display = 'flex';
-//     document.querySelector('.container').style.display = 'block'; 
-
-//     // localStorage.setItem( "bool", 'false' ); 
-//     console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
-//     new Init().getNextPage();  
-// } 
-// else{
-//     window.localStorage.setAttribute('bool', 'false');
-// }
-
-
-
-
-
-
 //6) *************  USER  **************
   
 
@@ -591,16 +442,7 @@ class User
         this.hasNewCityName = false; //the town name is not given
     }
 
-    openInputField() { 
-        // if ( this.hasNewCityName == false ) {
-        //     document.querySelector('#menu-getinput').style.display = 'flex';
-        //     // this.hasNewCityName = true;
-        // } 
-        // else  {
-        //     document.querySelector('#menu-getinput').style.display = 'none';
-        //     // this.hasNewCityName = false;
-        // }  
-        // if (hasNewCityName) {}
+    openInputField() {   
         standort_verwalten.addEventListener('click', function() { 
             document.querySelector('#menu-getinput').style.display = 'flex';     
             document.querySelector('#input-storage').focus();
@@ -659,22 +501,7 @@ class User
 const user = new User(); 
 user.openInputField();
 user.getWeather();
-
-
-
-// standort_verwalten.addEventListener('click', user.openInputField); //standort_verwalten == setting (dans appStorage.js)
-// submit.addEventListener('click', user.setDefaultTown);
-
-// function errorTrigger(element) 
-// {
-//     element.style.border = '2px solid red';
-//     element.style.boxShadow = '0px 0px 8px red';
-//     window.setTimeout(function () {
-//         element.style.border = '0px';
-//         element.style.boxShadow = 'none';
-//     }, 3000);
-// }
-
+ 
 
 
 
