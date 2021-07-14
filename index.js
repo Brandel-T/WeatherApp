@@ -100,6 +100,112 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
     });   
 
 }
+Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
+
+    let fetchedCurrentData = {};
+            // https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt={time}&appid=${this.apiKey}
+    fetch( `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${this.apiKey}`)
+    .then(  (response) => {
+        if ( response.ok ) {
+            response.json()
+            .then( (data) => {
+                fetchedCurrentData = data;
+                new WorkData().displayDailyForecast(data);
+                new WorkData().displayHourlyForecast(data);
+            })
+        } else {
+            console.error("ERROR by getting weather data using geolocation");
+        }
+    });
+
+    // console.log("par la geolocalisation          ..............", fetchedCurrentData);
+    return fetchedCurrentData;
+}  
+
+
+
+
+localStorage.setItem( "bool", `false` ); 
+class Init
+{
+    constructor() {
+        this.isInitialize = false; 
+    }
+
+    getParameter()
+    { 
+        // const defaultCityName = window.localStorage.getItem('defaultCityName'); 
+        const defaultCityName = document.querySelector('#city').value;
+        // let bool = new Boolean( localStorage.getItem("bool") );
+        // alert( bool instanceof Boolean);
+        // bool = false;
+        // counter = 1;
+        // if ()
+
+        // // if ( localStorage.getItem("bool") === 'false' ) 
+        // if (this.isInitialize == false || localStorage.getItem("bool") === 'false')
+        // { 
+        //     this.isInitialize = true;
+        //     // alert("la valeur de 'bool' est  ---> " + this.bool)
+        //     fetch( "http://api.openweathermap.org/data/2.5/weather?q=" + defaultCityName + "&units=metric&lang=de&appid="+ new Provider('c9842f587841ab3d8440bdae432a3299').apiKey)
+        //     .then ( (res) => {
+        //         if ( res.ok ) { //request success
+        //             // bool = true;
+        //             localStorage.setItem( "bool", `true` ); 
+        //             localStorage.setItem("defaultCityName", defaultCityName); 
+        //             // document.querySelector('#home').setAttribute('class','home-transition'); 
+        //             this.getNextPage();  
+        //         }
+        //         else {
+        //             document.querySelector('.requied').style.display = 'block';
+        //             window.setTimeout( function() {
+        //                 document.querySelector('.requied').style.display = 'none';
+        //             },
+        //             5000);
+        //         } 
+                
+        //         }, 
+        //         (reason) => {
+        //             window.alert('Check your Internet quality');
+        //             console.error(reason);
+        //     })
+        //     .catch((reason)=> console.error(reason));
+
+        // }
+        // else if ( localStorage.getItem("bool") === 'true' ) {
+        //     this.getNextPage();
+        //     document.querySelector('#home').setAttribute('class','home-transition'); 
+        // }
+        
+        if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
+            this.closeHomePage();
+            this.getNextPage();
+            document.querySelector('#home').setAttribute('class','home-transition');  
+        }
+        else {
+            fetch( "http://api.openweathermap.org/data/2.5/weather?q=" + defaultCityName + "&units=metric&lang=de&appid="+ new Provider('c9842f587841ab3d8440bdae432a3299').apiKey)
+            .then ( (res) => {
+                if ( res.ok ) { 
+                    localStorage.setItem("defaultCityName", defaultCityName);  
+                    this.getNextPage();  
+                }
+                else {
+                    document.querySelector('.requied').style.display = 'block';
+                    window.setTimeout( function() {
+                        document.querySelector('.requied').style.display = 'none';
+                    },
+                    5000);
+                } 
+                
+                }, 
+                (reason) => {
+                    window.alert('Check your Internet quality');
+                    console.error(reason);
+            })
+            .catch((reason)=> console.error(reason));
+
+        }
+    }
 
 
 
