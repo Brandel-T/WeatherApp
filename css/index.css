@@ -1,13 +1,10 @@
 
-body {
-    /* background-image: url('https://source.unsplash.com/1600x900/?Bingen am rhein'); */
-    /* background-image: url( 'weather_images/nigth.jpg' ) ; */
+body { 
     background-repeat: no-repeat;
     background-attachment:fixed;
     background-size: cover; 
     background-position: center;  
-    height: 100%; 
-    /* font-family: Arial, Helvetica, sans-serif;  */
+    height: 100%;  
 } 
 
 #main-bloc {  
