@@ -477,9 +477,15 @@ class WorkData
 
 
 //6) *************  USER  **************  
-
+/**
+ * beschreibt alle Operationen, die ein Benutzer machen
+ * kann: search machen , stadt ändern ..
+ * @author Brandel Tsagueu
+ * @version 1.0
+ */
 class User 
 {
+    //construcor
     constructor() {
         this.hasNewCityName = false; //the town name is not given
     }
