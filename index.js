@@ -325,12 +325,29 @@ menuInteraction.openMenu();
 menuInteraction.closeMenu();
 
 //4) *****  WORKDATA  ******
+/**
+ * 
+ * this class display weather info in the device
+ * after a search operation of the user using the city
+ * name, that he want to have weather infos
+ * @author Brandel Tsagueu
+ * @version 1.0
+ * @date 10.07.21
+ */
 class WorkData 
 {
     constructor( data ) {
         this.data = data; 
     }
 
+    /**
+     *anzeigen von aktuellem Wetter, Wetter pro Studen, und pro Tag
+     *aktuelle Wetter Information: Temperature, Feutichkeit..
+     *und ändert das Hintergrundsbild der Anwendung abhängig 
+     * von der aktueller Wettersituation
+     *@param data objekt aus einer der Methode der Klasse Provider
+     *@return void 
+     */
     displayCurrentWeather( data ) 
     {
         const { name } = data;  
