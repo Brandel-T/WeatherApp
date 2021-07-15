@@ -490,6 +490,15 @@ class User
         this.hasNewCityName = false; //the town name is not given
     }
 
+    /**
+     * in der Menü kann der User soll der User 
+     * ein Feld öffnen um die default Stadt auf Wunsch
+     * zu ändern
+     * @param any
+     * @return void
+     * 
+     * 
+    */
     openInputField() {   
         standort_verwalten.addEventListener('click', function() { 
             document.querySelector('#menu-getinput').style.display = 'flex';     
@@ -507,6 +516,13 @@ class User
         ); 
     }
 
+    /**
+     * Default Stadt ändern
+     * @param cityName neue Default-stadt
+     * @return void
+     * 
+     * 
+    */
     setDefaultTown( newCityName ) {
         
         newCityName = document.querySelector('#input-storage').value;
