@@ -1,7 +1,6 @@
 
 .menu {
-    color: blanchedalmond;
-    /* width: 350px; */
+    color: blanchedalmond; 
     width: 0;
     height: 100%;
     position: fixed;
@@ -76,12 +75,7 @@
 }
 #input-storage {
     height: 2rem;
-    width: max-content;
-/* 
-    border-top-width: 0 ;
-    border-left-width: 0 ;
-    border-right-width: 0 ; 
-    border-bottom: 3px solid white ; */
+    width: max-content; 
     background-color: rgba(255, 255, 255, 0);
     border: 0;
     color: #f3f3f362;
