@@ -66,10 +66,27 @@ let p = document.createElement('p');
     p.appendChild(p_content);
     document.body.appendChild(p);
 //3) ************** PROVIDER **************
+
+/**
+ * mithilfe eines API-Schnlüßels liefert uns diese Klasse
+ * Methoden zur Rückgabe eines Objekt, welches all wesentliche
+ * Wetter Daten in einem JSON Format
+ * 
+ * @author Brandel Tsagueu
+ * @version 1.0
+ * @param {*} apiKey
+ * 
+ *  
+ */
 function Provider( apiKey )
 {
     this.apiKey = apiKey;
 }
+/**
+ * @version 1.0
+ * @param cityName , Stadt deren Wetterinfos gesucht werden
+ * @return JSON-Object mit Wetter daten 
+ */
 Provider.prototype.fetchWeatherByCityName = function( cityName ) {
 
     let fetchedCurrentData = {};
@@ -92,8 +109,20 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
     });   
 
 }
+/**
+ * @version 1.0
+ * @param {latitude, longitude} , Stadt deren Wetterinfos gesucht werden
+ * @return JSON-Object mit Wetter daten abhängig von Geolocation
+ */
 Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
 
+    /**
+     * mittels fetch API und die Methode fetch() rufe ich die Weather info in Server von
+     * Openweather Map ab. Dafür brauche ich eine API key welches in http://api.openweathermap.org/
+     * erstellbar ist.
+     * Zur Verfügung wird mir diese Daten in Json gegeben
+     * diese JSON-Objekt werde ich dann in andere Methoden nutzen wie z.B. in Methoden der Klasse Workdata
+     */
     let fetchedCurrentData = {}; 
     fetch( `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${this.apiKey}`)
     .then(  (response) => {
@@ -215,12 +244,11 @@ if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
 
 
 
-
-//1) ****** TIMER *****
+ 
 function Reorganizer( days , months )
 { 
-    this.days = days; // []  
-    this.months = months ; // []  
+    this.days = days;  
+    this.months = months ;  
 } 
 
 Reorganizer.prototype.displayDaysInorder = function()
@@ -247,12 +275,10 @@ Reorganizer.prototype.changeHour = function( days_ordered )
     setInterval( 
         function () { 
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
-            const d = new Date();
-            // let sec = d.getSeconds();
+            const d = new Date(); 
             let min = d.getMinutes();
             let h = d.getHours();
-    
-            // if ( d.getSeconds() < 10 ) sec = `0${d.getSeconds()}`; 
+     
             if ( d.getMinutes() < 10 ) min = `0${d.getMinutes()}`;
             if ( d.getHours() < 10 ) h = `0${d.getHours()}`;
             document.querySelector('p.hour').innerHTML = days_ordered[days_ordered.length-1] + ", "+ d.getDate() + " " + months[d.getMonth()]+ " " + d.getFullYear()+ `, <strong> ${h}:${min} </strong>` ;
@@ -411,7 +437,7 @@ class WorkData
         let j = 0; 
         for (let i=1; i<=7 ; i++ ) 
         {
-            const { min, max } = data.daily[i].temp //les temperatures min et max
+            const { min, max } = data.daily[i].temp  
             const { icon } = data.daily[i].weather[0];
             const { humidity, wind_speed} = data.daily[i];
             console.log("daily forecast   ", min, max, icon,humidity, wind_speed);
@@ -433,8 +459,7 @@ class WorkData
 
 
 
-//6) *************  USER  **************
-  
+//6) *************  USER  **************  
 
 class User 
 {
@@ -449,8 +474,7 @@ class User
         });
 
         submit.addEventListener('click', this.setDefaultTown);
-
-        //actions on inner elements of menu 
+ 
         document.querySelector('.standort').addEventListener(
             'click',
             function() {
