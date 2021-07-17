@@ -1,8 +1,6 @@
 'use strict';
 
 
-'use strict';
-
  /**
   * @author Brandel Tsagueu
   * @date 12.07.21
