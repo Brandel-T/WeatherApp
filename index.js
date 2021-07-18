@@ -1,5 +1,5 @@
-'use strict';
 
+'use strict';
 
  /**
   * @author Brandel Tsagueu
@@ -28,7 +28,6 @@
   menu_weather_logo_div.append(menu_weather_logo_tmp, menu_weather_logo);
   document.querySelector('.standort').append( cityName , menu_weather_logo_div );
 
-
   const getinput = document.createElement('div');
   getinput.id = 'menu-getinput';
 
@@ -46,23 +45,11 @@
   menu_header.append(getinput); 
   document.querySelector('#menu-getinput').style.display = 'none';
 
-document.body.style.fontFamily = 'tahoma'; 
+document.body.style.fontFamily = 'tahoma';
+ 
 
-      
-let p = document.createElement('p');
-    const p_content = document.createTextNode("Der Stadtname ist falsch");
-    p.style.width = '100vw';
-    p.style.height = '20px';
-    p.style.color = 'white';
-    p.style.backgroundColor = 'red';
-    p.style.fontFamily = 'tahoma';
-    p.style.fontSize = '1rem';
-    p.style.position = 'fixed';
-    p.style.bottom = '0';
-    p.style.textAlign = 'center';
-    p.style.display = 'block';
-    p.appendChild(p_content);
-    document.body.appendChild(p);
+
+
 //3) ************** PROVIDER **************
 
 /**
@@ -75,7 +62,7 @@ let p = document.createElement('p');
  * @param {String} apiKey
  * 
  *  
- */
+ */ 
 function Provider( apiKey )
 {
     this.apiKey = apiKey;
@@ -107,7 +94,6 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
     });   
 
 }
-
 /**
  * holt Wetter daten anhand von Standort-koordinaten
  * and return ein Versprechen
@@ -117,14 +103,8 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
  */
 Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
 
-    /**
-     * mittels fetch API und die Methode fetch() rufe ich die Weather info in Server von
-     * Openweather Map ab. Dafür brauche ich eine API key welches in http://api.openweathermap.org/
-     * erstellbar ist.
-     * Zur Verfügung wird mir diese Daten in Json gegeben
-     * diese JSON-Objekt werde ich dann in andere Methoden nutzen wie z.B. in Methoden der Klasse Workdata
-     */
-    let fetchedCurrentData = {}; 
+    let fetchedCurrentData = {};
+            // https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt={time}&appid=${this.apiKey}
     fetch( `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${this.apiKey}`)
     .then(  (response) => {
         if ( response.ok ) {
@@ -138,11 +118,15 @@ Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
             console.error("ERROR by getting weather data using geolocation");
         }
     });
- 
+
+    // console.log("par la geolocalisation          ..............", fetchedCurrentData);
     return fetchedCurrentData;
 }  
 
- 
+
+
+
+localStorage.setItem( "bool", `false` ); 
 class Init
 {
     constructor() {
@@ -150,7 +134,8 @@ class Init
     }
 
     getParameter()
-    {  
+    { 
+        // const defaultCityName = window.localStorage.getItem('defaultCityName'); 
         const defaultCityName = document.querySelector('#city').value; 
         
         if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
@@ -211,10 +196,9 @@ class Init
         document.querySelector('.container').style.display = 'block'; 
 
         localStorage.setItem("bool", 'true');
-
-        // localStorage.setItem( "bool", 'false' ); 
+ 
         console.log( 'typeof :  localStorage.getItem("bool")' ,typeof localStorage.getItem("bool") );
-        // this.getNextPage();  
+  
     }
 }
 
@@ -239,6 +223,11 @@ if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
 
 
 
+
+
+
+
+//1) ****** TIMER *****
 /**
  * dient dazu die Wochentagen immer an der richtigen Position
  * zu plazieren, so dass sie mit den Wetter-informationen derjenigen Tagen
@@ -251,8 +240,8 @@ if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
  
 function Reorganizer( days , months )
 { 
-    this.days = days;  
-    this.months = months ;  
+    this.days = days; // []  
+    this.months = months ; // []  
 } 
 
 /**
@@ -278,7 +267,6 @@ Reorganizer.prototype.displayDaysInorder = function()
 
     return daysInOrder; 
 }
-
 /**
  * ändert die Uhrzeit und zeigt sie mit dem entsprechenden Tag dynamisch auf den Bildschirm an 
  * @author Brandel Tsagueu
@@ -324,10 +312,7 @@ function MenuBarInteractions( openMenuBtn, closeMenuBtn )
     this.openMenuBtn = openMenuBtn;
     this.closeMenuBtn = closeMenuBtn;
 }
-
-/**
- * Operation zum Öffnen der Menüleiste
- */
+//Operation zum Öffnen der Menüleiste
 MenuBarInteractions.prototype.openMenu = function openMenu() {  
     this.openMenuBtn.addEventListener('click', () => {
         document.querySelector('.menu').style.width = '350px'; 
@@ -350,6 +335,13 @@ const menuInteraction = new MenuBarInteractions( document.querySelector('.menu-i
 menuInteraction.openMenu();
 menuInteraction.closeMenu();
 
+
+
+
+
+
+
+
 //4) *****  WORKDATA  ******
 /**
  * 
@@ -360,7 +352,7 @@ menuInteraction.closeMenu();
  * @version 1.0
  * @date 10.07.21
  */
-class WorkData 
+ class WorkData 
 {
     constructor( data ) {
         this.data = data; 
@@ -454,7 +446,8 @@ class WorkData
 
         //every 1 hour
         for (let i=0 ; i < hourly_forecast.length; i++) 
-        { 
+        {
+            //hour
             if (hour < 10) {
                 hourly[i].innerText = `0${hour}:00`;
             } else if ( hour >= 24) {
@@ -488,16 +481,16 @@ class WorkData
         let j = 0; 
         for (let i=1; i<=7 ; i++ ) 
         {
-            const { min, max } = data.daily[i].temp  
+            const { min, max } = data.daily[i].temp //les temperatures min et max
             const { icon } = data.daily[i].weather[0];
             const { humidity, wind_speed} = data.daily[i];
             console.log("daily forecast   ", min, max, icon,humidity, wind_speed);
 
-            document.querySelectorAll('.temp-min-max')[j].innerText = Math.ceil(min) +"°/" + Math.ceil(max) + "°C"; //Temperature
-            document.querySelectorAll('.icon-prevision')[j].src = "http://openweathermap.org/img/wn/"+ icon+ ".png"; //icon des Wetter
-            document.querySelectorAll('.humidity')[j].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${humidity} %`; //Feutchigkeit
-            document.querySelectorAll('.wind-speed')[j].innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${wind_speed} Km/h`; //Windgeschwindigkeit
-        
+            document.querySelectorAll('.temp-min-max')[j].innerText = Math.ceil(min) +"°/" + Math.ceil(max) + "°C";
+            document.querySelectorAll('.icon-prevision')[j].src = "http://openweathermap.org/img/wn/"+ icon+ ".png";
+            document.querySelectorAll('.humidity')[j].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${humidity} %`;
+            document.querySelectorAll('.wind-speed')[j].innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${wind_speed} Km/h`;
+            console.log("j  ", j)
             j++; 
         }
     }
@@ -510,17 +503,16 @@ class WorkData
         new Provider('c9842f587841ab3d8440bdae432a3299').fetchWeatherByCityName( document.querySelector('.search').value ) //pour recupérer le nom de la ville
         document.querySelector('.search').blur();
     } 
-}
+} 
 
-
-
-//6) *************  USER  **************  
+//6) *************  USER  **************
 /**
  * beschreibt alle Operationen, die ein Benutzer machen
  * kann: search machen , stadt ändern ..
  * @author Brandel Tsagueu
  * @version 1.0
- */
+ */  
+
 class User 
 {
     //construcor
@@ -537,14 +529,15 @@ class User
      * 
      * 
     */
-    openInputField() {   
+    openInputField() {  
         standort_verwalten.addEventListener('click', function() { 
             document.querySelector('#menu-getinput').style.display = 'flex';     
             document.querySelector('#input-storage').focus();
         });
 
         submit.addEventListener('click', this.setDefaultTown);
- 
+
+        //actions on inner elements of menu 
         document.querySelector('.standort').addEventListener(
             'click',
             function() {
@@ -602,13 +595,8 @@ class User
         });    
     }
 }
+
 //Aufruf von Methoden der Klasse User
 const user = new User(); 
 user.openInputField();
-user.getWeather();
- 
-
-
-
-
-
+user.getWeather(); 

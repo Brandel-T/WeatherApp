@@ -292,3 +292,13 @@ button.search-icon:hover {
 
 
 
+
+@media only screen and (min-width: 380px ) {
+    body{
+        margin: 0 600px;
+    }
+
+    main #home {
+        width: 450px;
+    }
+}
