@@ -313,12 +313,21 @@ reorganizeDays.changeHour( daysInOrder );
 
 
 //2) ********  MENU_BAR_INTERACTIONS  *********
+/**
+ * verwaltet die Interaktion zwischen den Nutzer und 
+ * dem System in der Menüleite
+ * @param {Node} openMenuBtn 
+ * @param {Node} closeMenuBtn 
+ */
 function MenuBarInteractions( openMenuBtn, closeMenuBtn ) 
 {
     this.openMenuBtn = openMenuBtn;
     this.closeMenuBtn = closeMenuBtn;
 }
 
+/**
+ * Operation zum Öffnen der Menüleiste
+ */
 MenuBarInteractions.prototype.openMenu = function openMenu() {  
     this.openMenuBtn.addEventListener('click', () => {
         document.querySelector('.menu').style.width = '350px'; 
@@ -327,6 +336,7 @@ MenuBarInteractions.prototype.openMenu = function openMenu() {
         document.querySelector('#standort-verwalten').style.display = 'block';
     });
 }
+//Operation zum Schließen der Menü
 MenuBarInteractions.prototype.closeMenu = function closeMenu() {
     this.closeMenuBtn.addEventListener('click', () => {
         document.querySelector('.menu').style.width = '0px'; 
@@ -335,6 +345,7 @@ MenuBarInteractions.prototype.closeMenu = function closeMenu() {
         document.querySelector('#standort-verwalten').style.display = 'none';
     });
 }
+//Aufruf der Methoden der Klasse 'MenuBarInteractions'
 const menuInteraction = new MenuBarInteractions( document.querySelector('.menu-icon'), document.querySelector('.toclose-icon') );
 menuInteraction.openMenu();
 menuInteraction.closeMenu();
