@@ -454,8 +454,7 @@ class WorkData
 
         //every 1 hour
         for (let i=0 ; i < hourly_forecast.length; i++) 
-        {
-            //hour
+        { 
             if (hour < 10) {
                 hourly[i].innerText = `0${hour}:00`;
             } else if ( hour >= 24) {
