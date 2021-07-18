@@ -72,7 +72,7 @@ let p = document.createElement('p');
  * 
  * @author Brandel Tsagueu
  * @version 1.0
- * @param {*} apiKey
+ * @param {String} apiKey
  * 
  *  
  */
@@ -82,8 +82,8 @@ function Provider( apiKey )
 }
 /**
  * @version 1.0
- * @param cityName , Stadt deren Wetterinfos gesucht werden
- * @return JSON-Object mit Wetter daten 
+ * @param {String} cityName - Stadt deren Wetterinfos gesucht werden
+ * @return {Promise} JSON-Object mit Wetter daten 
  */
 Provider.prototype.fetchWeatherByCityName = function( cityName ) {
 
@@ -107,10 +107,13 @@ Provider.prototype.fetchWeatherByCityName = function( cityName ) {
     });   
 
 }
+
 /**
- * @version 1.0
- * @param {latitude, longitude} , Stadt deren Wetterinfos gesucht werden
- * @return JSON-Object mit Wetter daten abhängig von Geolocation
+ * holt Wetter daten anhand von Standort-koordinaten
+ * and return ein Versprechen
+ * @param {number} latitude 
+ * @param {number} longitude 
+ * @return {Promise}
  */
 Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
 
@@ -139,10 +142,7 @@ Provider.prototype.fetchWeatherByGeolocation= function( latitude, longitude ) {
     return fetchedCurrentData;
 }  
 
-
-
-
-localStorage.setItem( "bool", `false` ); 
+ 
 class Init
 {
     constructor() {
@@ -239,9 +239,15 @@ if ( localStorage.getItem( 'defaultCityName' ) !== null ) {
 
 
 
-
-
-
+/**
+ * dient dazu die Wochentagen immer an der richtigen Position
+ * zu plazieren, so dass sie mit den Wetter-informationen derjenigen Tagen
+ * übereinstimmen
+ * @author Brandel Tsagueu
+ * @version 1.0
+ * @param {Array} days 
+ * @param {Array} months 
+ */ 
  
 function Reorganizer( days , months )
 { 
@@ -249,6 +255,12 @@ function Reorganizer( days , months )
     this.months = months ;  
 } 
 
+/**
+ * 
+ * @returns {Array} - Feld enthaltend die Tage der Woche
+ * beginnend mit dem heutigen tag (an der Position 0 des Arrays)
+ * und die anderen Tage an den restlichen Positionen 
+ */
 Reorganizer.prototype.displayDaysInorder = function()
 {
     let daysInOrder, today, options, current_day;  
@@ -267,7 +279,12 @@ Reorganizer.prototype.displayDaysInorder = function()
     return daysInOrder; 
 }
 
-
+/**
+ * ändert die Uhrzeit und zeigt sie mit dem entsprechenden Tag dynamisch auf den Bildschirm an 
+ * @author Brandel Tsagueu
+ * @param {Array} days_ordered - Feld mit den sortierten Tagen @see displayDaysInorder
+ *  
+ */
 Reorganizer.prototype.changeHour = function( days_ordered ) 
 { 
     setInterval( 
@@ -408,6 +425,11 @@ class WorkData
         }
     }
 
+    /**
+     * Anzeige der Wettervorhersagen auf den Bildschirm von nächsten 24 Studen
+     * mit einem Zeitinterval von einer Stunde
+     * @param {Object} data - aus der Klasse @see Provider 
+     */
     displayHourlyForecast( data ) 
     {
         let d = new Date();
@@ -447,6 +469,10 @@ class WorkData
         }
     }
 
+    /**
+     * Anzeige der Wettervorhersagen auf den Bildschirm von nächsten 7 Tagen
+     * @param {Object} data - aus der Klasse @see Provider 
+     */
     displayDailyForecast( data )
     {
         let j = 0; 
@@ -457,15 +483,19 @@ class WorkData
             const { humidity, wind_speed} = data.daily[i];
             console.log("daily forecast   ", min, max, icon,humidity, wind_speed);
 
-            document.querySelectorAll('.temp-min-max')[j].innerText = Math.ceil(min) +"°/" + Math.ceil(max) + "°C";
-            document.querySelectorAll('.icon-prevision')[j].src = "http://openweathermap.org/img/wn/"+ icon+ ".png";
-            document.querySelectorAll('.humidity')[j].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${humidity} %`;
-            document.querySelectorAll('.wind-speed')[j].innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${wind_speed} Km/h`;
-            console.log("j  ", j)
+            document.querySelectorAll('.temp-min-max')[j].innerText = Math.ceil(min) +"°/" + Math.ceil(max) + "°C"; //Temperature
+            document.querySelectorAll('.icon-prevision')[j].src = "http://openweathermap.org/img/wn/"+ icon+ ".png"; //icon des Wetter
+            document.querySelectorAll('.humidity')[j].innerHTML = `<i style="font-size: .65rem" class="fas fa-tint"></i> ${humidity} %`; //Feutchigkeit
+            document.querySelectorAll('.wind-speed')[j].innerHTML = `<i style="color:#ffffff41 " class="fas fa-wind"></i> ${wind_speed} Km/h`; //Windgeschwindigkeit
+        
             j++; 
         }
     }
 
+    /**
+     * erlaubt die Suche der Wetter daten mithilfe von einem Stadnamen, 
+     * den ein Nutzer in der Suchleiste eingetippt hat.
+     */
     search () {
         new Provider('c9842f587841ab3d8440bdae432a3299').fetchWeatherByCityName( document.querySelector('.search').value ) //pour recupérer le nom de la ville
         document.querySelector('.search').blur();
@@ -540,6 +570,10 @@ class User
         }
     }
 
+    /**
+     * beschreibt die Operation die gemacht werden muss, 
+     * um eine Suche zu machen
+     */
     getWeather() {
         document.querySelector('.search-icon').addEventListener('click', (e) => { 
             if ( e.key == "Enter" ) { 
@@ -558,7 +592,7 @@ class User
         });    
     }
 }
-
+//Aufruf von Methoden der Klasse User
 const user = new User(); 
 user.openInputField();
 user.getWeather();
